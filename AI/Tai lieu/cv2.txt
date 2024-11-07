@@ -1,0 +1,57 @@
+1.Đọc hình ảnh
+Dùng để đọc hình ảnh từ file: python
+
+	import cv2
+	img = cv2.imread('image.jpg')
+	cv2.IMREAD_COLOR: đọc hình ảnh màu (mặc định).
+	cv2.IMREAD_GRAYSCALE: đọc hình ảnh xám.
+
+2. Hiển thị hình ảnh
+Dùng để hiển thị hình ảnh trong một cửa sổ:
+
+	cv2.imshow('Image Window', img)
+	cv2.waitKey(0)
+	cv2.destroyAllWindows()
+3. Lưu hình ảnh
+Dùng để lưu hình ảnh vào file:
+
+	cv2.imwrite('output.jpg', img)
+
+4. Thay đổi kích thước ảnh
+Dùng để thay đổi kích thước của ảnh:
+
+	resized_img = cv2.resize(img, (width, height))
+
+5. Chuyển đổi không gian màu
+Dùng để chuyển đổi giữa các không gian màu:
+	gray_img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+6. Vẽ hình lên ảnh
+Vẽ đường thẳng:
+
+	cv2.line(img, (x1, y1), (x2, y2), (B, G, R), thickness)
+
+Vẽ hình chữ nhật:
+	cv2.rectangle(img, (x, y), (x + width, y + height), (B, G, R), thickness)
+
+Vẽ hình tròn:
+	cv2.circle(img, (center_x, center_y), radius, (B, G, R), thickness)
+
+7. Cắt ảnh
+Cắt một phần ảnh theo tọa độ:
+	cropped_img = img[y1:y2, x1:x2]
+
+8. Làm mờ ảnh
+Dùng bộ lọc Gaussian để làm mờ ảnh:
+
+	blurred_img = cv2.GaussianBlur(img, (kernel_width, kernel_height), sigma)
+
+9. Phát hiện cạnh
+Dùng bộ lọc Canny để phát hiện cạnh:
+
+	edges = cv2.Canny(img, threshold1, threshold2)
+
+10. Viết văn bản lên ảnh
+Dùng để thêm văn bản vào ảnh:
+
+	cv2.putText(img, 'Text', (x, y), cv2.FONT_HERSHEY_SIMPLEX, font_scale, (B, G, R), thickness)

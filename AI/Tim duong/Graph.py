@@ -1,0 +1,227 @@
+import pickle
+import csv
+from haversine import haversine
+
+
+# Đồ thị
+class Graph:
+    def __init__(self, node):
+        self.root = node
+        self.children_node = []
+    
+    # Phương thức thêm một node con
+    def add_child(self, child_node):
+        self.children_node.append(child_node)
+    
+    # Phương thức thêm nhiều node con cùng lúc
+    def add_children(self, *child_nodes):
+        self.children_node.extend(child_nodes)
+    
+    # Khoảng cách giữa node cha và node con
+    def get_distance(self, child_node):
+        return haversine(self.root, child_node)
+    
+    def get_children(self):
+        childs = []
+        for child in self.children_node:
+            childs.append(child.root)
+    
+        return childs
+    
+    # Phương thức hiển thị thông tin node và các node con
+    def display(self):
+        print(f"Root: {self.root}")
+        print("Children:", self.get_children())
+        for child in self.children_node:
+            print(f"Distance between {self.root} and {child.root}: {self.get_distance(child.root)} (kilometers)")
+
+# Đọc dữ liệu từ file CSV
+with open('nodes.csv', mode='r') as file:
+    reader = csv.reader(file)
+    next(reader)  # Bỏ qua tiêu đề
+    nodes = [[float(row[0]), float(row[1])] for row in reader]
+
+# Hiển thị dữ liệu
+#print(nodes)
+
+# Chuyen toa do thanh nodes
+for idx in range(len(nodes)): 
+    nodes[idx] = Graph(nodes[idx])
+
+# Them cac node
+nodes[0].add_children(nodes[1], nodes[71])
+nodes[1].add_children(nodes[2], nodes[61])
+nodes[2].add_children(nodes[3], nodes[30])
+nodes[3].add_children(nodes[4])
+nodes[4].add_children(nodes[6])
+nodes[5].add_children(nodes[0], nodes[2])
+nodes[6].add_children(nodes[25], nodes[8])
+nodes[7].add_children(nodes[5])
+nodes[8].add_children(nodes[9], nodes[15])
+nodes[9].add_children(nodes[10],nodes[8])
+nodes[10].add_children(nodes[9], nodes[11])
+nodes[11].add_children(nodes[10],nodes[12])
+nodes[12].add_children(nodes[11], nodes[13])
+nodes[13].add_children(nodes[12], nodes[14])
+nodes[14].add_children(nodes[13], nodes[15])
+nodes[15].add_children(nodes[14], nodes[16])
+nodes[16].add_children(nodes[45], nodes[17])
+nodes[17].add_children(nodes[16],nodes[18],nodes[20])
+nodes[18].add_children(nodes[17],nodes[19], nodes[23])
+nodes[19].add_children(nodes[18])
+nodes[20].add_children(nodes[17], nodes[21])
+nodes[21].add_children(nodes[20], nodes[22])
+nodes[22].add_children(nodes[21], nodes[23])
+nodes[23].add_children(nodes[22],nodes[25])
+nodes[24].add_children(nodes[1], nodes[70], nodes[76])
+nodes[25].add_children(nodes[23], nodes[7])
+nodes[26].add_children(nodes[7], nodes[27])
+nodes[27].add_children(nodes[26])
+nodes[28].add_children(nodes[29], nodes[97])
+nodes[29].add_children(nodes[26], nodes[28])
+nodes[30].add_children(nodes[2], nodes[60], nodes[61])
+nodes[31].add_children(nodes[6], nodes[32], nodes[30])
+nodes[32].add_children(nodes[31], nodes[44], nodes[33])
+nodes[33].add_children(nodes[32], nodes[34])
+nodes[34].add_children(nodes[33], nodes[35])
+nodes[35].add_children(nodes[34], nodes[36])
+nodes[36].add_children(nodes[37], nodes[35])
+nodes[37].add_children(nodes[36], nodes[38])
+nodes[38].add_children(nodes[37], nodes[39])
+nodes[39].add_children(nodes[38], nodes[40])
+nodes[40].add_children(nodes[39], nodes[41])
+nodes[41].add_children(nodes[40], nodes[42], nodes[43])
+nodes[42].add_children(nodes[41])
+nodes[43].add_children(nodes[41], nodes[44])
+nodes[44].add_children(nodes[43], nodes[32])
+nodes[45].add_children(nodes[28], nodes[46])
+nodes[46].add_children(nodes[45], nodes[48], nodes[31])
+nodes[47].add_children(nodes[46])
+nodes[48].add_children(nodes[46], nodes[49])
+nodes[49].add_children(nodes[48], nodes[50], nodes[55])
+nodes[50].add_children(nodes[49], nodes[51], nodes[53])
+nodes[51].add_children(nodes[50], nodes[52])
+nodes[52].add_children(nodes[51])
+nodes[53].add_children(nodes[50], nodes[54])
+nodes[54].add_children(nodes[53])
+nodes[55].add_children(nodes[56], nodes[49])
+nodes[56].add_children(nodes[55], nodes[57])
+nodes[57].add_children(nodes[56], nodes[58], nodes[60])
+nodes[58].add_children(nodes[59], nodes[57])
+nodes[59].add_children(nodes[58])
+nodes[60].add_children(nodes[30], nodes[57], nodes[118], nodes[62])
+nodes[61].add_children(nodes[1], nodes[62], nodes[63])
+nodes[62].add_children(nodes[62], nodes[123], nodes[60], nodes[64])
+nodes[63].add_children(nodes[64])
+nodes[64].add_children(nodes[132], nodes[65])
+nodes[65].add_children(nodes[66], nodes[67])
+nodes[66].add_children(nodes[65])
+nodes[67].add_children(nodes[68], nodes[70])
+nodes[68].add_children(nodes[67], nodes[69])
+nodes[69].add_children(nodes[68])
+nodes[70].add_children(nodes[24], nodes[173], nodes[116])
+nodes[71].add_children(nodes[72], nodes[73])
+nodes[72].add_children(nodes[74], nodes[75])
+nodes[73].add_children(nodes[74])
+nodes[74].add_children(nodes[72], nodes[77])
+nodes[75].add_children(nodes[76])
+nodes[76].add_children(nodes[77], nodes[80])
+nodes[77].add_children(nodes[78])
+nodes[78].add_children(nodes[82], nodes[79])
+nodes[79].add_children(nodes[78], nodes[80])
+nodes[80].add_children(nodes[81], nodes[170])
+nodes[81].add_children(nodes[24], nodes[116])
+nodes[82].add_children(nodes[83])
+nodes[83].add_children(nodes[84])
+nodes[84].add_children(nodes[85], nodes[109])
+nodes[85].add_children(nodes[86])
+nodes[86].add_children(nodes[87])
+nodes[87].add_children(nodes[88])
+nodes[88].add_children(nodes[89])
+nodes[89].add_children(nodes[90], nodes[105])
+nodes[90].add_children(nodes[91])
+nodes[91].add_children(nodes[92])
+nodes[92].add_children(nodes[93])
+nodes[93].add_children(nodes[94])
+nodes[94].add_children(nodes[95])
+nodes[95].add_children(nodes[99], nodes[171], nodes[96])
+nodes[96].add_children(nodes[95], nodes[29], nodes[97])
+nodes[97].add_children(nodes[96], nodes[98])
+nodes[98].add_children(nodes[97])
+nodes[99].add_children(nodes[100])
+nodes[100].add_children(nodes[101])
+nodes[101].add_children(nodes[99], nodes[106])
+nodes[102].add_children(nodes[103])
+nodes[103].add_children(nodes[102], nodes[172])
+nodes[104].add_children(nodes[103])
+nodes[105].add_children(nodes[104])
+nodes[106].add_children(nodes[102])
+nodes[107].add_children(nodes[108])
+nodes[108].add_children(nodes[85])
+nodes[109].add_children(nodes[110])
+nodes[110].add_children(nodes[111])
+nodes[111].add_children(nodes[112])
+nodes[112].add_children(nodes[113])
+nodes[113].add_children(nodes[114])
+nodes[114].add_children(nodes[115])
+nodes[115].add_children(nodes[79])
+nodes[116].add_children(nodes[81], nodes[168])
+nodes[117].add_children(nodes[96], nodes[171])
+nodes[118].add_children(nodes[60], nodes[119], nodes[120])
+nodes[119].add_children(nodes[118])
+nodes[120].add_children(nodes[121], nodes[118])
+nodes[122].add_children(nodes[120])
+nodes[123].add_children(nodes[62], nodes[122])
+nodes[124].add_children(nodes[122])
+nodes[125].add_children(nodes[124])
+nodes[126].add_children(nodes[125])
+nodes[127].add_children(nodes[126], nodes[145], nodes[139], nodes[129])
+nodes[128].add_children(nodes[129])
+nodes[129].add_children(nodes[127])
+nodes[130].add_children(nodes[128])
+nodes[131].add_children(nodes[130])
+nodes[132].add_children(nodes[64], nodes[131])
+nodes[133].add_children(nodes[132])
+nodes[134].add_children(nodes[133], nodes[173])
+nodes[135].add_children(nodes[134], nodes[136])
+nodes[136].add_children(nodes[137])
+nodes[137].add_children(nodes[138])
+nodes[138].add_children(nodes[139])
+nodes[139].add_children(nodes[140], nodes[138], nodes[144])
+nodes[140].add_children(nodes[139])
+nodes[141].add_children(nodes[140])
+nodes[142].add_children(nodes[141])
+nodes[143].add_children(nodes[142])
+nodes[144].add_children(nodes[139], nodes[162], nodes[166], nodes[145])
+nodes[145].add_children(nodes[127], nodes[146], nodes[144] )
+nodes[146].add_children( nodes[145], nodes[150], nodes[147])
+nodes[147].add_children(nodes[148], nodes[146])     
+nodes[148].add_children(nodes[147], nodes[149])
+nodes[149].add_children(nodes[148])
+nodes[150].add_children(nodes[146], nodes[151], nodes[160])
+nodes[151].add_children(nodes[152], nodes[150], nodes[154])
+nodes[152].add_children(nodes[151])
+nodes[153].add_children(nodes[161])
+nodes[154].add_children(nodes[155], nodes[156], nodes[151])
+nodes[155].add_children(nodes[154])
+nodes[156].add_children(nodes[157], nodes[154], nodes[158])
+nodes[157].add_children(nodes[156])
+nodes[158].add_children(nodes[159], nodes[156], nodes[161])
+nodes[159].add_children(nodes[158])
+nodes[160].add_children(nodes[150])
+nodes[161].add_children(nodes[153], nodes[158], nodes[162])
+nodes[162].add_children(nodes[161], nodes[144], nodes[163])
+nodes[163].add_children(nodes[166], nodes[162])
+nodes[164].add_children(nodes[166], nodes[165])
+nodes[165].add_children(nodes[164])
+nodes[166].add_children(nodes[164], nodes[163], nodes[144])
+nodes[167].add_children(nodes[127])
+nodes[168].add_children(nodes[135])
+nodes[169].add_children(nodes[81])
+nodes[171].add_children(nodes[117])
+nodes[172].add_children(nodes[93])
+
+
+# Lưu dữ liệu vào file (serialization)
+with open('graph_nodes.pkl', 'wb') as file:
+    pickle.dump(nodes, file)
