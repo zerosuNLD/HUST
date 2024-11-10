@@ -5,7 +5,7 @@
 #define PORT 8080
 const string username = "root";
 const string password = "123456";
-const string database = "quan_ly_cong_viec";
+const string database = "quan_ly_du_an";
 
 int main() {
     

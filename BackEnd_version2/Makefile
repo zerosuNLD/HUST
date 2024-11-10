@@ -1,8 +1,8 @@
 # Đặt biến cho trình biên dịch và cờ biên dịch
 CXX = g++
 CXXFLAGS = -std=c++11 # Thêm chuẩn C++ 
-LDFLAGS_SERVER = -lpthread -lmysqlcppconn # Cờ liên kết cho server
-LDFLAGS_CLIENT = -lmysqlcppconn # Nếu client không cần MySQL, có thể xóa
+LDFLAGS_SERVER = -lmysqlcppconn # Cờ liên kết cho server
+LDFLAGS_CLIENT = -lmysqlcppconn -lc -lstdc++
 
 # Tên file thực thi
 TARGET_SERVER = server
@@ -41,13 +41,10 @@ SRCS_SERVER = Server.cpp \
               Server/QueryDatabase/Implement_query/updateStatus.cpp \
               Command_Type/Command_Type.cpp
 
-SRCS_CLIENT = Client_v2.cpp \
+SRCS_CLIENT = Client.cpp \
               Client/Client_Contructor.cpp \
               Client/Send_Request.cpp \
               Command_Type/Command_Type.cpp \
-              Router/RouterConstructor.cpp \
-              Router/Create_Router/createRouterForLogin.cpp \
-              Router/Create_Router/createRouterForSignup.cpp
 
 # Danh sách file đối tượng
 OBJS_SERVER = $(SRCS_SERVER:.cpp=.o)
