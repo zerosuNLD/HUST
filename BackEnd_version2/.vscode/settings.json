@@ -17,6 +17,7 @@
         }
     ],
     "files.associations": {
-        "limits": "cpp"
+        "limits": "cpp",
+        "ostream": "cpp"
     }
 }

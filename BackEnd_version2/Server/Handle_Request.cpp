@@ -13,7 +13,7 @@ void Server::handle_request(const int& sd, const std::string& request) {
 	// Xác định loại lệnh
 	CommandType command = parse_command(command_str);
 	std::string response;  // Biến lưu trữ phản hồi sẽ gửi tới client
-	// std::cout << "Request from client: " << request << std::endl;
+	std::cout << "Request from client: " << request << std::endl;
 	switch (command) {
 		case SIGNUP: {
 			response = signup(sd, iss);
